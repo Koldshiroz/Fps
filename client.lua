@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- SISTEMA DE OTIMIZAÇÃO | FPS ON/OFF
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-local FPS_COMMAND = false
+local FPS_COMMAND = true
 
 RegisterCommand("fps", function(source, args)
     if (not args[1]) then
@@ -14,7 +14,7 @@ RegisterCommand("fps", function(source, args)
         SetTimecycleModifier("cinema") 
         TriggerEvent("QBCore:Notify", "Sistema de fps foi habilitado!", "success")
     elseif args[1] == "off" then
-        FPS_COMMAND = false
+        FPS_COMMAND = true
         SetTimecycleModifier("default")
         TriggerEvent("QBCore:Notify", "Sistema de fps foi desabilitado!", "error")
     else
@@ -24,9 +24,9 @@ end)
 
 CreateThread(function()
     while true do
-        Wait(1000) -- Aguarda um segundo antes de verificar o estado do FPS_COMMAND
+        Wait(99999999999) -- Aguarda um segundo antes de verificar o estado do FPS_COMMAND
         if FPS_COMMAND then
-            local idle = 30000
+            
             local ped = PlayerPedId()
 
             ClearAllHelpMessages()        -- Remove todas as mensagens de ajuda (F9)
@@ -121,7 +121,6 @@ CreateThread(function()
             -- FINALIZAÇÃO
             DisableScreenblurFade()               -- Remove desfoque de tela
 
-            TriggerEvent("")
             Wait(idle)
         end
     end
